@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MarksheetMeritList" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7995fba7-590b-49e5-9819-5e80a3c07995">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Project10DataAdapter.xml"/>
+	<queryString language="SQL">
+		<![CDATA[select 
+  roll_no, 
+  name, 
+  physics, 
+  chemistry, 
+  maths,
+  (physics + chemistry + maths) as total,
+  round(cast((physics + chemistry + maths) as double) / 3, 2) as percentage
+from st_marksheet
+where physics > 33 
+and chemistry > 33 
+and maths > 33]]>
+	</queryString>
+	<field name="roll_no" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="roll_no"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="st_marksheet"/>
+	</field>
+	<field name="name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="st_marksheet"/>
+	</field>
+	<field name="physics" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="physics"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="st_marksheet"/>
+	</field>
+	<field name="chemistry" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="chemistry"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="st_marksheet"/>
+	</field>
+	<field name="maths" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="maths"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="st_marksheet"/>
+	</field>
+	<field name="total" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="total"/>
+	</field>
+	<field name="percentage" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="percentage"/>
+	</field>
+	<group name="roll_no">
+		<groupExpression><![CDATA[$F{roll_no}]]></groupExpression>
+	</group>
+	<group name="name">
+		<groupExpression><![CDATA[$F{name}]]></groupExpression>
+	</group>
+	<group name="physics">
+		<groupExpression><![CDATA[$F{physics}]]></groupExpression>
+	</group>
+	<group name="chemistry">
+		<groupExpression><![CDATA[$F{chemistry}]]></groupExpression>
+	</group>
+	<group name="maths">
+		<groupExpression><![CDATA[$F{maths}]]></groupExpression>
+	</group>
+	<group name="total">
+		<groupExpression><![CDATA[$F{total}]]></groupExpression>
+	</group>
+	<group name="percentage">
+		<groupExpression><![CDATA[$F{percentage}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="90" splitType="Stretch">
+			<staticText>
+				<reportElement x="190" y="20" width="200" height="30" uuid="050fa904-6661-4cdb-b66b-c796b281ea79"/>
+				<textElement>
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RAYS Technologies]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="60" width="140" height="30" uuid="b8bb4311-d3a8-4f25-9452-4afa5b2a061d"/>
+				<textElement>
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Marksheet Merit List]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="81" height="30" uuid="3bf23eef-0092-4d87-9a08-b18e989e4119">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="53cefc51-42d1-4c94-85b4-6129d429a19e"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Roll No]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="0" width="79" height="30" uuid="56a64ab0-0c68-44e1-accb-380b9d57a6df">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1660a245-c30a-461b-97d9-18a4e86906d2"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="0" width="79" height="30" uuid="5ea630e6-727b-45e6-9cb6-23d37c6ceab3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2423019e-4858-4d30-b9b2-7ebc025eaa21"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Physics]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="239" y="0" width="79" height="30" uuid="ab40bc49-af13-4826-a0bf-f18e2d4e5651">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3546d88b-6fac-4ff1-b751-b3ae8d0e7383"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Chemistry]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="318" y="0" width="79" height="30" uuid="3c1c01f9-81ac-4624-a39d-afc77953ae70">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0f812381-1807-4582-be07-584bf3b9b2e5"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Maths]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="0" width="79" height="30" uuid="b619a9fa-87ff-48de-bbc6-6c4d55efa5ac">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9f3df6d6-6226-45d9-980f-9e064d0eb889"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="476" y="0" width="79" height="30" uuid="8f5fb7e8-c0d3-4c04-b68e-f44bf172531f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ecee30b3-b40e-4060-ab72-676636d388e1"/>
+				</reportElement>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Percentage(%)]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="81" height="30" uuid="5e09ed34-7fa7-41b5-84a4-8a2bf04e3da2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="53cefc51-42d1-4c94-85b4-6129d429a19e"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{roll_no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="81" y="0" width="79" height="30" uuid="76b71a2b-b9c8-4d0a-96c3-d81e6931f7d9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1660a245-c30a-461b-97d9-18a4e86906d2"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="0" width="79" height="30" uuid="b4bb7fed-69b3-4a50-a128-1d4a72bcd567">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2423019e-4858-4d30-b9b2-7ebc025eaa21"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{physics}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="0" width="79" height="30" uuid="b9191c85-7848-4131-8703-c09e82b87e90">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3546d88b-6fac-4ff1-b751-b3ae8d0e7383"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{chemistry}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="318" y="0" width="79" height="30" uuid="ca6c8c69-40a0-4d28-8da5-848dc24c79fa">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0f812381-1807-4582-be07-584bf3b9b2e5"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{maths}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="397" y="0" width="79" height="30" uuid="79d146c9-c532-4cac-b1b4-0d607b5c9adc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9f3df6d6-6226-45d9-980f-9e064d0eb889"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="476" y="0" width="79" height="30" uuid="16977657-7fc3-44fa-83e1-fc25dbf621c9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ecee30b3-b40e-4060-ab72-676636d388e1"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{percentage}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="69" splitType="Stretch">
+			<textField>
+				<reportElement x="270" y="30" width="98" height="20" uuid="861728c1-daca-4498-b1e0-b4d442544033"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
