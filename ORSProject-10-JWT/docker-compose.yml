@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: project10-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: project10
+    ports:
+      - "3308:3306"
+    networks:
+      - mynetwork
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+
+  backend:
+    build:
+      context: ./ORSProject10Backend
+    container_name: project10-backend
+    ports:
+      - "8080:8080"
+    networks:
+      - mynetwork
+    depends_on:
+      - mysql
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/project10
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+
+  frontend:
+    build:
+      context: ./ORSProject10Frontend
+    container_name: project10-frontend
+    ports:
+      - "8081:80"
+    networks:
+      - mynetwork
+    depends_on:
+      - backend
+
+networks:
+  mynetwork:
+    driver: bridge
