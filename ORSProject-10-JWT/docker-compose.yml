@@ -17,7 +17,7 @@ services:
 
   backend:
     build:
-      context: ./ORSProject10Backend
+      context: .
     container_name: project10-backend
     ports:
       - "8080:8080"
