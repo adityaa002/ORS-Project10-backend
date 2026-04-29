@@ -17,7 +17,8 @@ services:
 
   backend:
     build:
-      context: .
+      context: ./backend
+      dockerfile: Dockerfile   # backend Dockerfile inside backend folder
     container_name: project10-backend
     ports:
       - "8080:8080"
@@ -32,7 +33,8 @@ services:
 
   frontend:
     build:
-      context: ./ORSProject10Frontend
+      context: ./frontend
+      dockerfile: Dockerfile   # frontend Dockerfile inside frontend folder
     container_name: project10-frontend
     ports:
       - "8081:80"
