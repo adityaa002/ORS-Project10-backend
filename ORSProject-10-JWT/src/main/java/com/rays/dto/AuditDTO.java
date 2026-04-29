@@ -8,84 +8,115 @@ import javax.persistence.Table;
 
 import com.rays.common.BaseDTO;
 
+/**
+ * Data Transfer Object (DTO) representing audit records in the system.
+ * <p>
+ * Maps to the database table {@code st_audit} and stores information
+ * about user actions, including type, actor, timestamp, and result.
+ * </p>
+ *
+ * <p>
+ * This class extends {@link BaseDTO}, inheriting common fields such as
+ * {@code id}, {@code createdBy}, {@code modifiedBy}, and timestamps.
+ * </p>
+ *
+ * <p>
+ * Typical usage includes tracking CRUD operations, login attempts,
+ * or other system events for auditing and compliance purposes.
+ * </p>
+ *
+ * @author Aditya
+ * @version 1.0
+ */
 @Entity
 @Table(name = "st_audit")
 public class AuditDTO extends BaseDTO {
 
-	@Column(name = "audit_id", length = 50)
-	private long auditId;
+    /** Unique identifier for the audit record. */
+    @Column(name = "audit_id", length = 50)
+    private long auditId;
 
-	@Column(name = "action_type", length = 50)
-	private String actionType;
+    /** Type of action performed (e.g., CREATE, UPDATE, DELETE, LOGIN). */
+    @Column(name = "action_type", length = 50)
+    private String actionType;
 
-	@Column(name = "action_by", length = 50)
-	private String actionBy;
+    /** User or system actor who performed the action. */
+    @Column(name = "action_by", length = 50)
+    private String actionBy;
 
-	@Column(name = "action_time", length = 50)
-	private LocalDateTime actionTime;
+    /** Timestamp when the action occurred. */
+    @Column(name = "action_time", length = 50)
+    private LocalDateTime actionTime;
 
-	@Column(name = "action_result", length = 50)
-	private String actionResult;
+    /** Result of the action (e.g., SUCCESS, FAILURE). */
+    @Column(name = "action_result", length = 50)
+    private String actionResult;
 
-	public long getAuditId() {
-		return auditId;
-	}
+    // -------------------------
+    // Getters and Setters
+    // -------------------------
 
-	public void setAuditId(long auditId) {
-		this.auditId = auditId;
-	}
+    public long getAuditId() {
+        return auditId;
+    }
 
-	public String getActionType() {
-		return actionType;
-	}
+    public void setAuditId(long auditId) {
+        this.auditId = auditId;
+    }
 
-	public void setActionType(String actionType) {
-		this.actionType = actionType;
-	}
+    public String getActionType() {
+        return actionType;
+    }
 
-	public String getActionBy() {
-		return actionBy;
-	}
+    public void setActionType(String actionType) {
+        this.actionType = actionType;
+    }
 
-	public void setActionBy(String actionBy) {
-		this.actionBy = actionBy;
-	}
+    public String getActionBy() {
+        return actionBy;
+    }
 
-	public LocalDateTime getActionTime() {
-		return actionTime;
-	}
+    public void setActionBy(String actionBy) {
+        this.actionBy = actionBy;
+    }
 
-	public void setActionTime(LocalDateTime actionTime) {
-		this.actionTime = actionTime;
-	}
+    public LocalDateTime getActionTime() {
+        return actionTime;
+    }
 
-	public String getActionResult() {
-		return actionResult;
-	}
+    public void setActionTime(LocalDateTime actionTime) {
+        this.actionTime = actionTime;
+    }
 
-	public void setActionResult(String actionResult) {
-		this.actionResult = actionResult;
-	}
+    public String getActionResult() {
+        return actionResult;
+    }
 
-	@Override
-	public String getUniqueKey() {
-		return "actionType";
-	}
+    public void setActionResult(String actionResult) {
+        this.actionResult = actionResult;
+    }
 
-	@Override
-	public String getUniqueValue() {
-		return actionType;
-	}
+    // -------------------------
+    // BaseDTO Overrides
+    // -------------------------
 
-	@Override
-	public String getLabel() {
-		return "Action";
-	}
+    @Override
+    public String getUniqueKey() {
+        return "actionType";
+    }
 
-	@Override
-	public String getTableName() {
-		// TODO Auto-generated method stub
-		return "Action";
-	}
+    @Override
+    public String getUniqueValue() {
+        return actionType;
+    }
 
+    @Override
+    public String getLabel() {
+        return "Action";
+    }
+
+    @Override
+    public String getTableName() {
+        return "Action";
+    }
 }

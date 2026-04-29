@@ -18,7 +18,23 @@ import com.rays.util.EmailMessage;
 import com.rays.util.EmailUtility;
 
 import com.rays.exception.RecordNotFoundException;
-
+/**
+ * User Service Implementation
+ *
+ * <p>
+ * Provides business logic implementation for User entity.
+ * Extends {@link BaseServiceImpl} to inherit generic CRUD operations.
+ * </p>
+ *
+ * <p>
+ * This layer acts as an intermediary between Controller and DAO.
+ * Additional business rules (if required) can be implemented here.
+ * </p>
+ *
+ * @author Aditya
+ * @version 1.0
+ * @since 2026
+ */
 @Service
 @Transactional
 public class UserServiceImpl extends BaseServiceImpl<UserDTO, UserDAOInt> implements UserServiceInt {

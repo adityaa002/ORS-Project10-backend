@@ -2,73 +2,107 @@ package com.rays.common;
 
 import com.rays.dto.UserDTO;
 
+/**
+ * Holds contextual information about the currently logged-in user.
+ * <p>
+ * Provides details such as user ID, login ID, name, role, and associated
+ * {@link UserDTO}. This context is used throughout the application to
+ * maintain user-specific state and enforce role-based access.
+ * </p>
+ *
+ * @author Aditya
+ * @version 1.0
+ */
 public class UserContext {
 
-	private Long userId = 0L;
-	private String loginId = "root";
-	private String name = null;
-	private Long roleId = 0L;
-	private String roleName = "root";
+    /** Unique identifier of the user */
+    private Long userId = 0L;
 
-	private UserDTO userDTO = null;
+    /** Login ID (username/email) of the user */
+    private String loginId = "root";
 
-	public UserContext() {
-	}
+    /** Full name of the user */
+    private String name = null;
 
-	public UserContext(UserDTO dto) {
-		this.userDTO = dto;
-		this.userId = dto.getId();
-		this.loginId = dto.getLoginId();
-		this.name = dto.getName();
-		this.roleId = dto.getRoleId();
-		this.roleName = dto.getRoleName();
-	}
+    /** Role ID associated with the user */
+    private Long roleId = 0L;
 
-	public Long getUserId() {
-		return userId;
-	}
+    /** Role name associated with the user */
+    private String roleName = "root";
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
+    /** Complete UserDTO object for additional user details */
+    private UserDTO userDTO = null;
 
-	public String getLoginId() {
-		return loginId;
-	}
+    /**
+     * Default constructor.
+     * <p>
+     * Initializes context with default values.
+     * </p>
+     */
+    public UserContext() {
+    }
 
-	public void setLoginId(String loginId) {
-		this.loginId = loginId;
-	}
+    /**
+     * Constructs a UserContext from a UserDTO.
+     *
+     * @param dto UserDTO containing user details
+     */
+    public UserContext(UserDTO dto) {
+        this.userDTO = dto;
+        this.userId = dto.getId();
+        this.loginId = dto.getLoginId();
+        this.name = dto.getName();
+        this.roleId = dto.getRoleId();
+        this.roleName = dto.getRoleName();
+    }
 
-	public String getName() {
-		return name;
-	}
+    // ---------------- Standard Getters and Setters ---------------- //
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public Long getUserId() {
+        return userId;
+    }
 
-	public Long getRoleId() {
-		return roleId;
-	}
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
-	}
+    public String getLoginId() {
+        return loginId;
+    }
 
-	public String getRoleName() {
-		return roleName;
-	}
+    public void setLoginId(String loginId) {
+        this.loginId = loginId;
+    }
 
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public UserDTO getUserDTO() {
-		return userDTO;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setUserDTO(UserDTO userDTO) {
-		this.userDTO = userDTO;
-	}
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public UserDTO getUserDTO() {
+        return userDTO;
+    }
+
+    public void setUserDTO(UserDTO userDTO) {
+        this.userDTO = userDTO;
+    }
 }

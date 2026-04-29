@@ -10,29 +10,73 @@ import com.rays.common.BaseDTO;
 import com.rays.common.BaseForm;
 import com.rays.dto.TimeTableDTO;
 
+/**
+ * TimeTable Form
+ *
+ * <p>
+ * This form is used to capture timetable-related input data from UI/API.
+ * It validates incoming request data before converting it into {@link TimeTableDTO}.
+ * </p>
+ *
+ * <p>
+ * Used in examination module to schedule exams for courses and subjects.
+ * </p>
+ *
+ * <b>Fields:</b>
+ * <ul>
+ *   <li>courseId / courseName - course details</li>
+ *   <li>subjectId / subjectName - subject details</li>
+ *   <li>examDate - date of exam</li>
+ *   <li>examTime - time of exam</li>
+ *   <li>semester - semester information</li>
+ *   <li>description - additional details</li>
+ * </ul>
+ *
+ * @author Aditya
+ * @version 1.0
+ * @since 2026
+ */
 public class TimeTableForm extends BaseForm {
 
+	/**
+	 * Course reference ID
+	 */
 	@NotNull(message = "Course is required")
 	@Min(1)
 	private Long courseId = 0L;
 
 	private String courseName;
 
+	/**
+	 * Subject reference ID
+	 */
 	@NotNull(message = "Subject is required")
 	@Min(1)
 	private Long subjectId = 0L;
 
 	private String subjectName;
 
+	/**
+	 * Exam date
+	 */
 	@NotNull(message = "Exam Date is required")
 	private Date examDate;
 
+	/**
+	 * Exam time slot
+	 */
 	@NotEmpty(message = "Exam Time is required")
 	private String examTime;
 
+	/**
+	 * Semester
+	 */
 	@NotEmpty(message = "Semester is required")
 	private String semester;
 
+	/**
+	 * Additional description
+	 */
 	@NotEmpty(message = "Description is required")
 	private String description;
 
@@ -100,6 +144,11 @@ public class TimeTableForm extends BaseForm {
 		this.description = description;
 	}
 
+	/**
+	 * Converts Form data into TimeTableDTO.
+	 *
+	 * @return populated TimeTableDTO object
+	 */
 	@Override
 	public BaseDTO getDto() {
 

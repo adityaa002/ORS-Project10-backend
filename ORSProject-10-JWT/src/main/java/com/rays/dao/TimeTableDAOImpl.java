@@ -14,7 +14,22 @@ import com.rays.common.UserContext;
 import com.rays.dto.CourseDTO;
 import com.rays.dto.SubjectDTO;
 import com.rays.dto.TimeTableDTO;
-
+/**
+ *  TimeTable Data Access Object Implementation
+ *
+ * <p>
+ * Provides database interaction logic for  TimeTable entity.
+ * Extends {@link BaseDAOImpl} to inherit generic CRUD operations.
+ * </p>
+ *
+ * <p>
+ * Uses JPA Criteria API for dynamic query construction.
+ * </p>
+ *
+ * @author Aditya
+ * @version 1.0
+ * @since 2026
+ */
 @Repository
 public class TimeTableDAOImpl extends BaseDAOImpl<TimeTableDTO> implements TimeTableDAOInt {
 

@@ -14,13 +14,39 @@ import com.rays.dto.DecryptionDTO;
 import com.rays.form.DecryptionForm;
 import com.rays.service.DecryptionServiceInt;
 
+/**
+ * Decryption Controller Class
+ *
+ * <p>
+ * Handles REST API requests for Decryption module.
+ * Provides preload endpoint and inherits common CRUD operations
+ * from {@link BaseCtl}.
+ * </p>
+ *
+ * <b>Endpoint:</b>
+ * <ul>
+ *   <li>/Decryption/preload - Load decryption data</li>
+ * </ul>
+ *
+ * @author Aditya
+ * @version 1.0
+ * @since 2026
+ */
 @RestController
 @RequestMapping(value = "Decryption")
 public class DecryptionCtl extends BaseCtl<DecryptionForm, DecryptionDTO, DecryptionServiceInt> {
 
+	/**
+	 * Service layer for Decryption operations
+	 */
 	@Autowired
 	public DecryptionServiceInt decryptionService;
 
+	/**
+	 * Preloads decryption data.
+	 *
+	 * @return ORSResponse containing list of DecryptionDTO
+	 */
 	@GetMapping("/preload")
 	public ORSResponse preload() {
 

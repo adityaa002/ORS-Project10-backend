@@ -15,6 +15,22 @@ import com.rays.dto.CollegeDTO;
 import com.rays.dto.CourseDTO;
 import com.rays.dto.FacultyDTO;
 import com.rays.dto.SubjectDTO;
+/**
+ * Faculty Data Access Object Implementation
+ *
+ * <p>
+ * Provides database interaction logic for Faculty entity.
+ * Extends {@link BaseDAOImpl} to inherit generic CRUD operations.
+ * </p>
+ *
+ * <p>
+ * Uses JPA Criteria API for dynamic query construction.
+ * </p>
+ *
+ * @author Aditya
+ * @version 1.0
+ * @since 2026
+ */
 
 @Repository
 public class FacultyDAOImpl extends BaseDAOImpl<FacultyDTO> implements FacultyDAOInt {

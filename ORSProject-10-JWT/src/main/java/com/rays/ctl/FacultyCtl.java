@@ -20,19 +20,52 @@ import com.rays.service.CourseServiceInt;
 import com.rays.service.FacultyServiceInt;
 import com.rays.service.SubjectServiceInt;
 
+/**
+ * Faculty Controller Class
+ *
+ * <p>
+ * Handles REST API requests for Faculty module.
+ * Provides preload data required for UI dropdowns such as
+ * Course, Subject, and College.
+ * Also inherits common CRUD operations from {@link BaseCtl}.
+ * </p>
+ *
+ * <b>Endpoint:</b>
+ * <ul>
+ *   <li>/Faculty/preload - Load dropdown data (course, subject, college)</li>
+ * </ul>
+ *
+ * @author Aditya
+ * @version 1.0
+ * @since 2026
+ */
 @RestController
 @RequestMapping(value = "Faculty")
 public class FacultyCtl extends BaseCtl<FacultyForm, FacultyDTO, FacultyServiceInt> {
 
+	/**
+	 * Service for Course operations
+	 */
 	@Autowired
 	private CourseServiceInt courseService;
 
+	/**
+	 * Service for Subject operations
+	 */
 	@Autowired
 	private SubjectServiceInt subjectService;
 
+	/**
+	 * Service for College operations
+	 */
 	@Autowired
 	private CollegeServiceInt collegeService;
 
+	/**
+	 * Preloads dropdown data for Faculty module.
+	 *
+	 * @return ORSResponse containing courseList, subjectList, and collegeList
+	 */
 	@GetMapping("preload")
 	public ORSResponse preload() {
 

@@ -6,25 +6,70 @@ import javax.persistence.Table;
 
 import com.rays.common.BaseDTO;
 
+/**
+ * Marksheet Data Transfer Object
+ *
+ * <p>
+ * Represents student marksheet entity.
+ * Stores academic details including roll number, student reference,
+ * and subject-wise marks.
+ * </p>
+ *
+ * <p>
+ * This entity maps to table <b>st_marksheet</b>.
+ * </p>
+ *
+ * <b>Fields:</b>
+ * <ul>
+ *   <li>rollNo - unique roll number of student</li>
+ *   <li>studentId - reference to student</li>
+ *   <li>name - student name</li>
+ *   <li>physics - marks in Physics</li>
+ *   <li>chemistry - marks in Chemistry</li>
+ *   <li>maths - marks in Mathematics</li>
+ * </ul>
+ *
+ * @author Aditya
+ * @version 1.0
+ * @since 2026
+ */
 @Entity
 @Table(name = "st_marksheet")
 public class MarksheetDTO extends BaseDTO {
 
+	/**
+	 * Roll number (unique)
+	 */
 	@Column(name = "roll_no", length = 20)
 	protected String rollNo = null;
 
+	/**
+	 * Student ID (foreign key reference)
+	 */
 	@Column(name = "student_id")
 	protected Long studentId;
 
+	/**
+	 * Student name
+	 */
 	@Column(name = "name", length = 50)
 	protected String name = null;
 
+	/**
+	 * Physics marks
+	 */
 	@Column(name = "physics")
 	protected Integer physics;
 
+	/**
+	 * Chemistry marks
+	 */
 	@Column(name = "chemistry")
 	protected Integer chemistry;
 
+	/**
+	 * Mathematics marks
+	 */
 	@Column(name = "maths")
 	protected Integer maths;
 
@@ -76,34 +121,43 @@ public class MarksheetDTO extends BaseDTO {
 		this.maths = maths;
 	}
 
+	/**
+	 * Returns unique key field.
+	 */
 	@Override
 	public String getUniqueKey() {
-		// TODO Auto-generated method stub
 		return "rollNo";
 	}
 
+	/**
+	 * Returns unique value.
+	 */
 	@Override
 	public String getUniqueValue() {
-		// TODO Auto-generated method stub
 		return rollNo;
 	}
 
+	/**
+	 * Returns label for UI display.
+	 */
 	@Override
 	public String getLabel() {
-		// TODO Auto-generated method stub
 		return "roll No";
 	}
 
+	/**
+	 * Returns table name.
+	 */
 	@Override
 	public String getTableName() {
-		// TODO Auto-generated method stub
 		return "marksheet";
 	}
 
+	/**
+	 * Returns value for dropdown/list.
+	 */
 	@Override
 	public String getValue() {
-		// TODO Auto-generated method stub
 		return name;
 	}
-
 }

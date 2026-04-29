@@ -1,46 +1,84 @@
 package com.rays.common;
 
+/**
+ * Base Form class used for transferring data between UI and DTO.
+ * <p>
+ * Provides common fields such as ID, audit information, pagination, and batch
+ * operations. All form classes should extend this class to inherit standard
+ * properties and utility methods.
+ * </p>
+ *
+ * @author Aditya
+ * @version 1.0
+ */
 public class BaseForm {
 
-	protected Long id;
+    /** Primary key ID */
+    protected Long id;
 
-	protected String createdBy;
+    /** User who created the record */
+    protected String createdBy;
 
-	protected String modifiedBy;
+    /** User who last modified the record */
+    protected String modifiedBy;
 
-	protected long createdDatetime;
+    /** Timestamp when the record was created */
+    protected long createdDatetime;
 
-	protected long modifiedDatetime;
+    /** Timestamp when the record was last modified */
+    protected long modifiedDatetime;
 
-	private Long[] ids;
+    /** Array of IDs for batch operations (e.g., deleteMany) */
+    private Long[] ids;
 
-	private int pageNo = 0;
+    /** Current page number for pagination */
+    private int pageNo = 0;
 
-	private int pageSize = 5;
+    /** Page size for pagination */
+    private int pageSize = 5;
 
-	private String operation;
+    /** Operation type (e.g., save, update, delete) */
+    private String operation;
 
-	public Long getId() {
-		return id;
-	}
+    // ---------------- Standard Getters and Setters ---------------- //
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public BaseDTO getDto() {
-		return null;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public <T extends BaseDTO> T initDTO(T dto) {
+    /**
+     * Converts form data to a DTO object.
+     * <p>
+     * By default, returns null. Subclasses should override this method to
+     * provide proper DTO conversion.
+     * </p>
+     *
+     * @return DTO object
+     */
+    public BaseDTO getDto() {
+        return null;
+    }
 
-		if (id != null && id > 0) {
-			dto.setId(id);
-
-		} else {
-			dto.setId(null);
-		}
-		return dto;
-
-	}
+    /**
+     * Initializes a DTO with form values.
+     * <p>
+     * Sets the ID if available, otherwise assigns null.
+     * </p>
+     *
+     * @param dto DTO object to initialize
+     * @param <T> type extending BaseDTO
+     * @return initialized DTO
+     */
+    public <T extends BaseDTO> T initDTO(T dto) {
+        if (id != null && id > 0) {
+            dto.setId(id);
+        } else {
+            dto.setId(null);
+        }
+        return dto;
+    }
 }

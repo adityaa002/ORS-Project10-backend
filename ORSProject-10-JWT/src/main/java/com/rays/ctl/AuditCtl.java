@@ -14,13 +14,46 @@ import com.rays.dto.AuditDTO;
 import com.rays.form.AuditForm;
 import com.rays.service.AuditServiceInt;
 
+/**
+ * Audit Controller Class
+ *
+ * <p>
+ * This controller handles all REST API requests related to Audit module.
+ * It provides endpoint for preload and inherits common CRUD operations
+ * from {@link BaseCtl}.
+ * </p>
+ *
+ * <b>Endpoint:</b>
+ * <ul>
+ *   <li>/Audit/preload - Load audit data</li>
+ * </ul>
+ *
+ * <b>Responsibilities:</b>
+ * <ul>
+ *   <li>Handle HTTP requests</li>
+ *   <li>Delegate processing to service layer</li>
+ *   <li>Return response using ORSResponse</li>
+ * </ul>
+ *
+ * @author Aditya
+ * @version 1.0
+ * @since 2026
+ */
 @RestController
 @RequestMapping(value = "Audit")
 public class AuditCtl extends BaseCtl<AuditForm, AuditDTO, AuditServiceInt> {
 
+	/**
+	 * Service layer for Audit operations
+	 */
 	@Autowired
 	AuditServiceInt auditService;
 	
+	/**
+	 * Preloads audit data.
+	 *
+	 * @return ORSResponse containing list of AuditDTO
+	 */
 	@GetMapping(value = "preload")
 	public ORSResponse preload() {
 		

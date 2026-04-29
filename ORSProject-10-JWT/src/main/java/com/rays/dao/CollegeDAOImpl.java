@@ -11,7 +11,22 @@ import org.springframework.stereotype.Repository;
 
 import com.rays.common.BaseDAOImpl;
 import com.rays.dto.CollegeDTO;
-
+/**
+ * College Data Access Object Implementation
+ *
+ * <p>
+ * Provides database interaction logic for College entity.
+ * Extends {@link BaseDAOImpl} to inherit generic CRUD operations.
+ * </p>
+ *
+ * <p>
+ * Uses JPA Criteria API for dynamic query construction.
+ * </p>
+ *
+ * @author Aditya
+ * @version 1.0
+ * @since 2026
+ */
 @Repository
 public class CollegeDAOImpl extends BaseDAOImpl<CollegeDTO> implements CollegeDAOInt {
 

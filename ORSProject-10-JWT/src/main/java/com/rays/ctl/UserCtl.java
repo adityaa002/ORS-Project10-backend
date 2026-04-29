@@ -31,28 +31,67 @@ import com.rays.service.AttachmentServiceInt;
 import com.rays.service.RoleServiceInt;
 import com.rays.service.UserServiceInt;
 
+/**
+ * User Controller Class
+ *
+ * <p>
+ * Handles REST API requests for User module.
+ * Provides operations like profile management, profile picture upload/download,
+ * password change, and preload data.
+ * Also inherits common CRUD operations from {@link BaseCtl}.
+ * </p>
+ *
+ * <b>Endpoints:</b>
+ * <ul>
+ *   <li>/User/preload - Load role list</li>
+ *   <li>/User/myProfile - Update user profile</li>
+ *   <li>/User/profilePic/{userId} - Upload/Download profile picture</li>
+ *   <li>/User/changePassword - Change user password</li>
+ * </ul>
+ *
+ * @author Aditya
+ * @version 1.0
+ * @since 2026
+ */
 @RestController
 @RequestMapping(value = "User")
 public class UserCtl extends BaseCtl<UserForm, UserDTO, UserServiceInt> {
 
+	/**
+	 * Service for Role operations
+	 */
 	@Autowired
 	RoleServiceInt roleService = null;
 
+	/**
+	 * Service for Attachment operations (profile picture)
+	 */
 	@Autowired
 	AttachmentServiceInt attachmentService;
 
+	/**
+	 * Preloads role list for dropdown.
+	 *
+	 * @return ORSResponse containing list of roles
+	 */
 	@GetMapping("preload")
 	public ORSResponse preload() {
 
 		ORSResponse res = new ORSResponse();
 		RoleDTO dto = new RoleDTO();
-		// dto.setStatus(RoleDTO.ACTIVE);
 		List<DropdownList> list = roleService.search(dto, userContext);
 		res.addResult("roleList", list);
 		return res;
 
 	}
 
+	/**
+	 * Updates logged-in user's profile.
+	 *
+	 * @param form          profile form
+	 * @param bindingResult validation result
+	 * @return ORSResponse with status message
+	 */
 	@PostMapping("myProfile")
 	public ORSResponse myProfile(@RequestBody @Valid MyProfileForm form, BindingResult bindingResult) {
 
@@ -77,6 +116,14 @@ public class UserCtl extends BaseCtl<UserForm, UserDTO, UserServiceInt> {
 		return res;
 	}
 
+	/**
+	 * Uploads profile picture for user.
+	 *
+	 * @param userId user ID
+	 * @param file   uploaded file
+	 * @param req    HttpServletRequest
+	 * @return ORSResponse containing imageId
+	 */
 	@PostMapping("/profilePic/{userId}")
 	public ORSResponse uploadPic(@PathVariable Long userId, @RequestParam("file") MultipartFile file,
 			HttpServletRequest req) {
@@ -84,40 +131,39 @@ public class UserCtl extends BaseCtl<UserForm, UserDTO, UserServiceInt> {
 		AttachmentDTO attachmentDto = new AttachmentDTO(file);
 
 		attachmentDto.setDescription("profile pic");
-
 		attachmentDto.setUserId(userId);
 
 		UserDTO userDto = baseService.findById(userId, userContext);
 
 		if (userDto.getImageId() != null && userDto.getImageId() > 0) {
-
 			attachmentDto.setId(userDto.getImageId());
-
 		}
 
 		Long imageId = attachmentService.save(attachmentDto, userContext);
 
 		if (userDto.getImageId() == null) {
-
 			userDto.setImageId(imageId);
-
 			baseService.update(userDto, userContext);
 		}
 
 		ORSResponse res = new ORSResponse();
-
 		res.addResult("imageId", imageId);
 
 		return res;
 	}
 
+	/**
+	 * Downloads profile picture for user.
+	 *
+	 * @param userId   user ID
+	 * @param response HttpServletResponse
+	 */
 	@GetMapping("/profilePic/{userId}")
 	public void downloadPic(@PathVariable Long userId, HttpServletResponse response) {
 
 		try {
 
 			UserDTO userDto = baseService.findById(userId, userContext);
-
 			AttachmentDTO attachmentDTO = null;
 
 			if (userDto != null) {
@@ -137,14 +183,24 @@ public class UserCtl extends BaseCtl<UserForm, UserDTO, UserServiceInt> {
 		}
 	}
 
+	/**
+	 * Changes user password.
+	 *
+	 * @param form ChangePasswordForm
+	 * @return ORSResponse with status message
+	 */
 	@PostMapping("changePassword")
 	public ORSResponse changePassword(@RequestBody @Valid ChangePasswordForm form) {
 		ORSResponse res = new ORSResponse(true);
 
-		boolean flag = baseService.changePassword(form.getLoginId(), form.getOldPassword(), form.getNewPassword(),
-				userContext);
+		boolean flag = baseService.changePassword(
+				form.getLoginId(),
+				form.getOldPassword(),
+				form.getNewPassword(),
+				userContext
+		);
 
-		if (flag == false) {
+		if (!flag) {
 			res.setSuccess(false);
 			res.addMessage("enter correct old password..!");
 		} else {
@@ -154,5 +210,4 @@ public class UserCtl extends BaseCtl<UserForm, UserDTO, UserServiceInt> {
 		return res;
 
 	}
-
 }

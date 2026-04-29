@@ -11,29 +11,77 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.rays.common.BaseDTO;
 
+/**
+ * Attachment Data Transfer Object
+ *
+ * <p>
+ * Represents file attachment entity such as profile pictures or documents.
+ * Stores file metadata and binary content in database.
+ * </p>
+ *
+ * <p>
+ * This entity maps to table <b>ST_ATTACHMENT</b>.
+ * </p>
+ *
+ * <b>Fields:</b>
+ * <ul>
+ *   <li>name - file name</li>
+ *   <li>type - MIME type of file</li>
+ *   <li>description - file description</li>
+ *   <li>userId - associated user</li>
+ *   <li>doc - file content (stored as BLOB)</li>
+ * </ul>
+ *
+ * @author Aditya
+ * @version 1.0
+ * @since 2026
+ */
 @Entity
 @Table(name = "ST_ATTACHMENT")
 public class AttachmentDTO extends BaseDTO {
 
+	/**
+	 * File name
+	 */
 	@Column(name = "NAME", length = 100)
 	protected String name = null;
 
+	/**
+	 * File MIME type (e.g., image/png, application/pdf)
+	 */
 	@Column(name = "TYPE", length = 100)
 	protected String type = null;
 
+	/**
+	 * Description of file
+	 */
 	@Column(name = "DESCRIPTION", length = 500)
 	protected String description = null;
 
+	/**
+	 * Associated user ID
+	 */
 	@Column(name = "USER_ID")
 	protected Long userId = null;
 
+	/**
+	 * File content stored as binary (BLOB)
+	 */
 	@Lob
 	@Column(name = "DOC")
 	private byte[] doc;
 
+	/**
+	 * Default constructor
+	 */
 	public AttachmentDTO() {
 	}
 
+	/**
+	 * Constructs AttachmentDTO from MultipartFile.
+	 *
+	 * @param file uploaded file
+	 */
 	public AttachmentDTO(MultipartFile file) {
 		name = file.getOriginalFilename();
 		type = file.getContentType();
@@ -89,27 +137,35 @@ public class AttachmentDTO extends BaseDTO {
 		this.doc = doc;
 	}
 
+	/**
+	 * Returns unique key field (not implemented).
+	 */
 	@Override
 	public String getUniqueKey() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Returns unique value (not implemented).
+	 */
 	@Override
 	public String getUniqueValue() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Returns label for display (not implemented).
+	 */
 	@Override
 	public String getLabel() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * Returns table name (not implemented).
+	 */
 	@Override
 	public String getTableName() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

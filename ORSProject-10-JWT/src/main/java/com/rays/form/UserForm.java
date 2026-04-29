@@ -11,39 +11,99 @@ import com.rays.common.BaseDTO;
 import com.rays.common.BaseForm;
 import com.rays.dto.UserDTO;
 
+/**
+ * User Form
+ *
+ * <p>
+ * This form is used to capture user-related input data from UI/API.
+ * It validates incoming request data before converting it into {@link UserDTO}.
+ * </p>
+ *
+ * <p>
+ * Used in authentication and user management module for registration,
+ * login, and profile handling.
+ * </p>
+ *
+ * <b>Fields:</b>
+ * <ul>
+ *   <li>firstName / lastName - user identity</li>
+ *   <li>loginId - unique login identifier (email/username)</li>
+ *   <li>password - user password</li>
+ *   <li>roleId / roleName - role mapping</li>
+ *   <li>dob - date of birth</li>
+ *   <li>gender - gender</li>
+ *   <li>phone - primary mobile number</li>
+ *   <li>alternateMobile - secondary contact</li>
+ *   <li>status - active/inactive state</li>
+ * </ul>
+ *
+ * @author Aditya
+ * @version 1.0
+ * @since 2026
+ */
 public class UserForm extends BaseForm {
 
+	/**
+	 * First name of user
+	 */
 	@NotEmpty(message = "First Name is required")
 	private String firstName;
 
+	/**
+	 * Last name of user
+	 */
 	@NotEmpty(message = "Last Name is required")
 	private String lastName;
 
+	/**
+	 * Login ID (unique username/email)
+	 */
 	@NotEmpty(message = "Login Id is required")
 	private String loginId;
 
+	/**
+	 * Password (should be encrypted in service layer)
+	 */
 	@NotEmpty(message = "Password is required")
 	private String password;
 
+	/**
+	 * Role reference ID
+	 */
 	@NotNull(message = "Role is required")
 	@Min(1)
 	private Long roleId;
 
 	private String roleName = null;
 
+	/**
+	 * Date of birth
+	 */
 	@NotNull(message = "Date of birth is required")
 	private Date dob;
 
+	/**
+	 * Gender
+	 */
 	@NotEmpty(message = "Gender is required")
 	private String gender;
 
+	/**
+	 * Primary phone number (10 digits)
+	 */
 	@NotNull(message = "Mobile No is required")
-	@Pattern(regexp = "(^$|[0-9]{10})")
+	@Pattern(regexp = "[0-9]{10}", message = "Invalid mobile number")
 	private String phone;
 
+	/**
+	 * Alternate mobile number
+	 */
 	@NotEmpty(message = "Alternate Mobile No is required")
 	private String alternateMobile;
 
+	/**
+	 * User status (ACTIVE / INACTIVE)
+	 */
 	@NotEmpty(message = "Status is required")
 	private String status;
 
@@ -135,6 +195,11 @@ public class UserForm extends BaseForm {
 		this.status = status;
 	}
 
+	/**
+	 * Converts Form data into UserDTO.
+	 *
+	 * @return populated UserDTO object
+	 */
 	@Override
 	public BaseDTO getDto() {
 

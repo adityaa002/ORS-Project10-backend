@@ -15,6 +15,23 @@ import com.rays.common.UserContext;
 import com.rays.dto.MarksheetDTO;
 import com.rays.dto.StudentDTO;
 
+/**
+ * Marksheet Data Access Object Implementation
+ *
+ * <p>
+ * Provides database interaction logic for Marksheet entity.
+ * Extends {@link BaseDAOImpl} to inherit generic CRUD operations.
+ * </p>
+ *
+ * <p>
+ * Uses JPA Criteria API for dynamic query construction.
+ * </p>
+ *
+ * @author Aditya
+ * @version 1.0
+ * @since 2026
+ */
+
 @Repository
 public class MarksheetDAOImpl extends BaseDAOImpl<MarksheetDTO> implements MarksheetDAOInt {
 

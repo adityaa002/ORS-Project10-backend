@@ -6,14 +6,46 @@ import com.rays.common.BaseDTO;
 import com.rays.common.BaseForm;
 import com.rays.dto.CourseDTO;
 
+/**
+ * Course Form
+ *
+ * <p>
+ * This form is used to capture course-related input data from UI/API.
+ * It validates incoming request data before converting it into {@link CourseDTO}.
+ * </p>
+ *
+ * <p>
+ * Responsible for mapping request fields to DTO using {@link #getDto()} method.
+ * </p>
+ *
+ * <b>Fields:</b>
+ * <ul>
+ *   <li>name - course name</li>
+ *   <li>duration - course duration</li>
+ *   <li>description - course description</li>
+ * </ul>
+ *
+ * @author Aditya
+ * @version 1.0
+ * @since 2026
+ */
 public class CourseForm extends BaseForm {
 
+	/**
+	 * Course name
+	 */
 	@NotEmpty(message = "Name is required")
 	private String name;
 
+	/**
+	 * Course duration
+	 */
 	@NotEmpty(message = "Duration is required")
 	private String duration;
 
+	/**
+	 * Course description
+	 */
 	@NotEmpty(message = "Description is required")
 	private String description;
 
@@ -41,6 +73,11 @@ public class CourseForm extends BaseForm {
 		this.description = description;
 	}
 
+	/**
+	 * Converts Form data into CourseDTO.
+	 *
+	 * @return populated CourseDTO object
+	 */
 	@Override
 	public BaseDTO getDto() {
 
@@ -50,6 +87,5 @@ public class CourseForm extends BaseForm {
 		dto.setDescription(description);
 
 		return dto;
-
 	}
 }

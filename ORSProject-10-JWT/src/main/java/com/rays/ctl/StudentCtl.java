@@ -15,13 +15,39 @@ import com.rays.form.StudentForm;
 import com.rays.service.CollegeServiceInt;
 import com.rays.service.StudentServiceInt;
 
+/**
+ * Student Controller Class
+ *
+ * <p>
+ * Handles REST API requests for Student module.
+ * Provides preload endpoint for loading college data
+ * and inherits common CRUD operations from {@link BaseCtl}.
+ * </p>
+ *
+ * <b>Endpoint:</b>
+ * <ul>
+ *   <li>/Student/preload - Load college list for student form</li>
+ * </ul>
+ *
+ * @author Aditya
+ * @version 1.0
+ * @since 2026
+ */
 @RestController
 @RequestMapping(value = "Student")
 public class StudentCtl extends BaseCtl<StudentForm, StudentDTO, StudentServiceInt> {
 
+	/**
+	 * Service for College operations
+	 */
 	@Autowired
 	private CollegeServiceInt collegeService = null;
 
+	/**
+	 * Preloads college list for Student module.
+	 *
+	 * @return ORSResponse containing list of CollegeDTO
+	 */
 	@GetMapping("preload")
 	public ORSResponse preload() {
 
@@ -32,5 +58,4 @@ public class StudentCtl extends BaseCtl<StudentForm, StudentDTO, StudentServiceI
 		res.addResult("collegeList", list);
 		return res;
 	}
-
 }

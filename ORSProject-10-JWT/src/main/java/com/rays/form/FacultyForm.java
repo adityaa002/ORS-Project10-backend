@@ -11,42 +11,102 @@ import com.rays.common.BaseDTO;
 import com.rays.common.BaseForm;
 import com.rays.dto.FacultyDTO;
 
+/**
+ * Faculty Form
+ *
+ * <p>
+ * This form is used to capture faculty-related input data from UI/API.
+ * It performs validation before converting request data into {@link FacultyDTO}.
+ * </p>
+ *
+ * <p>
+ * Responsible for mapping form fields to DTO using {@link #getDto()} method.
+ * </p>
+ *
+ * <b>Fields:</b>
+ * <ul>
+ *   <li>firstName - faculty first name</li>
+ *   <li>lastName - faculty last name</li>
+ *   <li>dob - date of birth</li>
+ *   <li>gender - gender</li>
+ *   <li>phoneNo - contact number</li>
+ *   <li>email - email address</li>
+ *   <li>qualification - highest qualification</li>
+ *   <li>collegeId / collegeName - college details</li>
+ *   <li>courseId / courseName - course details</li>
+ *   <li>subjectId / subjectName - subject details</li>
+ * </ul>
+ *
+ * @author Aditya
+ * @version 1.0
+ * @since 2026
+ */
 public class FacultyForm extends BaseForm {
 
+	/**
+	 * First name of faculty
+	 */
 	@NotEmpty(message = "First Name is required")
 	private String firstName;
 
+	/**
+	 * Last name of faculty
+	 */
 	@NotEmpty(message = "Last Name is required")
 	private String lastName;
 
+	/**
+	 * Date of birth
+	 */
 	@NotNull(message = "Date of birth is required")
 	private Date dob;
 
+	/**
+	 * Gender
+	 */
 	@NotEmpty(message = "Gender is required")
 	private String gender;
 
+	/**
+	 * Phone number (10 digits)
+	 */
 	@NotNull(message = "Phone No is required")
 	@Pattern(regexp = "(^$|[0-9]{10})")
 	private String phoneNo;
 
+	/**
+	 * Email address
+	 */
 	@NotEmpty(message = "Email ID is required")
 	private String email;
 
+	/**
+	 * Qualification
+	 */
 	@NotEmpty(message = "Qualification is required")
 	private String qualification;
 
+	/**
+	 * College reference ID
+	 */
 	@NotNull(message = "College is required")
 	@Min(1)
 	private Long collegeId = 0L;
 
 	private String collegeName;
 
+	/**
+	 * Course reference ID
+	 */
 	@NotNull(message = "Course is required")
 	@Min(1)
 	private Long courseId = 0L;
 
 	private String courseName;
 
+	/**
+	 * Subject reference ID
+	 */
 	@NotNull(message = "Subject is required")
 	@Min(1)
 	private Long subjectId = 0L;
@@ -157,6 +217,11 @@ public class FacultyForm extends BaseForm {
 		this.subjectName = subjectName;
 	}
 
+	/**
+	 * Converts Form data into FacultyDTO.
+	 *
+	 * @return populated FacultyDTO object
+	 */
 	@Override
 	public BaseDTO getDto() {
 
@@ -177,5 +242,4 @@ public class FacultyForm extends BaseForm {
 
 		return dto;
 	}
-
 }

@@ -33,20 +33,61 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 
+/**
+ * Jasper Report Controller
+ *
+ * <p>
+ * Handles PDF report generation using JasperReports.
+ * This controller compiles, fills, and exports reports dynamically
+ * using database connection.
+ * </p>
+ *
+ * <b>Endpoint:</b>
+ * <ul>
+ *   <li>/Jasper/report - Generates and returns PDF report</li>
+ * </ul>
+ *
+ * <b>Features:</b>
+ * <ul>
+ *   <li>Supports classpath and filesystem report loading</li>
+ *   <li>Caches compiled report for performance optimization</li>
+ *   <li>Generates PDF response directly in HTTP response</li>
+ * </ul>
+ *
+ * @author Aditya
+ * @version 1.0
+ * @since 2026
+ */
 @Transactional
 @RestController
 @RequestMapping(value = "Jasper")
 public class JasperCtl extends BaseCtl<MarksheetForm, MarksheetDTO, MarksheetServiceInt> {
 
+    /**
+     * Path of Jasper report file (configured in application.properties)
+     */
     @Value("${report.path}")
     private String reportPath;
 
+    /**
+     * EntityManager for obtaining Hibernate session and DB connection
+     */
     @PersistenceContext
     protected EntityManager entityManager;
 
-    // Cached compiled report — har request pe compile nahi hoga
+    /**
+     * Cached compiled Jasper report (to avoid recompilation on each request)
+     */
     private JasperReport cachedReport = null;
 
+    /**
+     * Generates PDF report and writes it to HTTP response.
+     *
+     * @param response HttpServletResponse
+     * @throws JRException  if Jasper processing fails
+     * @throws SQLException if DB connection fails
+     * @throws IOException  if stream handling fails
+     */
     @GetMapping(value = "/report", produces = MediaType.APPLICATION_PDF_VALUE)
     public void display(HttpServletResponse response) throws JRException, SQLException, IOException {
 
@@ -67,7 +108,7 @@ public class JasperCtl extends BaseCtl<MarksheetForm, MarksheetDTO, MarksheetSer
             cachedReport = JasperCompileManager.compileReport(input);
             System.out.println("Report compiled successfully.");
         } else {
-            input.close(); // stream ka kaam ho gaya
+            input.close();
         }
 
         // Step 3: DB connection via Hibernate
@@ -98,8 +139,18 @@ public class JasperCtl extends BaseCtl<MarksheetForm, MarksheetDTO, MarksheetSer
     }
 
     /**
-     * classpath: aur file: dono handle karta hai
-     * Spring Boot fat JAR ke saath ClassPathResource reliable hai
+     * Loads Jasper report file as InputStream.
+     *
+     * <p>
+     * Supports:
+     * <ul>
+     *   <li>Classpath resources (for Spring Boot JAR)</li>
+     *   <li>Filesystem paths (for Docker or external config)</li>
+     * </ul>
+     * </p>
+     *
+     * @return InputStream of report file
+     * @throws IOException if file not found or cannot be read
      */
     private InputStream loadReportStream() throws IOException {
         if (reportPath.startsWith("classpath:")) {
@@ -110,7 +161,6 @@ public class JasperCtl extends BaseCtl<MarksheetForm, MarksheetDTO, MarksheetSer
             return resource.getInputStream();
 
         } else {
-            // Docker volume mount ya absolute path
             java.io.File file = new java.io.File(reportPath);
             System.out.println("Loading from filesystem: " + file.getAbsolutePath());
             System.out.println("File exists: " + file.exists());

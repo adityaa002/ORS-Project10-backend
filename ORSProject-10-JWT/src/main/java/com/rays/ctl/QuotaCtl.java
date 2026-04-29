@@ -15,12 +15,38 @@ import com.rays.dto.RoleDTO;
 import com.rays.form.QuotaForm;
 import com.rays.service.QuotaServiceInt;
 
+/**
+ * Quota Controller Class
+ *
+ * <p>
+ * Handles REST API requests for Quota module.
+ * Provides preload endpoint and inherits common CRUD operations
+ * from {@link BaseCtl}.
+ * </p>
+ *
+ * <b>Endpoint:</b>
+ * <ul>
+ *   <li>/Quota/preload - Load quota data</li>
+ * </ul>
+ *
+ * @author Aditya
+ * @version 1.0
+ * @since 2026
+ */
 @RestController
 @RequestMapping(value = "Quota")
 public class QuotaCtl extends BaseCtl<QuotaForm, QuotaDTO, QuotaServiceInt> {
 
+	/**
+	 * Service layer for Quota operations
+	 */
 	public QuotaServiceInt quotaService;
 
+	/**
+	 * Preloads quota data using UserContext from ThreadLocal.
+	 *
+	 * @return ORSResponse containing list of QuotaDTO
+	 */
 	@GetMapping("/preload")
 	public ORSResponse preload() {
 
@@ -35,5 +61,4 @@ public class QuotaCtl extends BaseCtl<QuotaForm, QuotaDTO, QuotaServiceInt> {
 		return res;
 
 	}
-
 }

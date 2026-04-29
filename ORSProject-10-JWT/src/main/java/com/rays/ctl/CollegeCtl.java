@@ -11,31 +11,45 @@ import com.rays.common.BaseCtl;
 import com.rays.common.DropdownList;
 import com.rays.common.ORSResponse;
 import com.rays.dto.CollegeDTO;
-import com.rays.dto.RoleDTO;
 import com.rays.form.CollegeForm;
 import com.rays.service.CollegeServiceInt;
-import com.rays.service.RoleServiceInt;
 
+/**
+ * Controller for handling college-related operations.
+ * <p>
+ * Extends {@link BaseCtl} to inherit common CRUD functionality and provides
+ * additional endpoints for college management. Specifically, it supports
+ * preloading college data for dropdowns or UI initialization.
+ * </p>
+ *
+ * @author Aditya
+ * @version 1.0
+ */
 @RestController
 @RequestMapping(value = "College")
 public class CollegeCtl extends BaseCtl<CollegeForm, CollegeDTO, CollegeServiceInt> {
 
-	@Autowired
-	private CollegeServiceInt collegeServiceInt = null;
+    @Autowired
+    private CollegeServiceInt collegeServiceInt = null;
 
-	@GetMapping("preload")
-	public ORSResponse preload() {
+    /**
+     * Preloads college data for UI dropdowns.
+     * <p>
+     * Retrieves college entries from the service layer and returns them
+     * as part of the {@link ORSResponse}. This is typically used to
+     * initialize dropdown lists or pre-populate UI components.
+     * </p>
+     *
+     * @return ORSResponse containing college list
+     */
+    @GetMapping("preload")
+    public ORSResponse preload() {
+        ORSResponse res = new ORSResponse(true);
 
-		ORSResponse res = new ORSResponse(true);
+        CollegeDTO dto = new CollegeDTO();
+        List<DropdownList> collegeList = collegeServiceInt.search(dto, userContext);
 
-		CollegeDTO dto = new CollegeDTO();
-
-		List<DropdownList> collegeList = collegeServiceInt.search(dto, userContext);
-
-		res.addResult("collegeList", collegeList);
-
-		return res;
-
-	}
-
+        res.addResult("collegeList", collegeList);
+        return res;
+    }
 }
