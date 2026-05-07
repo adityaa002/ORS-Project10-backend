@@ -23,7 +23,8 @@ services:
 
   backend:
     build:
-      context: ./backend
+      context: ./backend/ORSProject-10-JWT  # 🔥 FIX: Match Jenkins path
+      dockerfile: Dockerfile
     container_name: project10-backend
     ports:
       - "8080:8080"
@@ -33,15 +34,16 @@ services:
       mysql:
         condition: service_healthy
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/project10
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      SPRING_JPA_SHOW_SQL: "false"
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/project10
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=false
 
   frontend:
     build:
       context: ./frontend
+      dockerfile: Dockerfile
     container_name: project10-frontend
     ports:
       - "8081:80"
