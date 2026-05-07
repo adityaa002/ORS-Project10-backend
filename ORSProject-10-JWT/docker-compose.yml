@@ -1,55 +1,55 @@
-version: '3.8'
+version: "3.8"
 
 services:
 
   mysql:
     image: mysql:8.0
     container_name: project10-mysql
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: project10
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
     ports:
       - "3308:3306"
-    networks:
-      - mynetwork
     volumes:
-      - ./mysql-data:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-proot"]
       interval: 10s
       timeout: 5s
-      retries: 5
-    command: --default-authentication-plugin=mysql_native_password
+      retries: 10
+      start_period: 20s
 
   backend:
     build:
-      context: ./backend
+      context: .
+      dockerfile: Dockerfile
     container_name: project10-backend
-    ports:
-      - "8080:8080"
-    networks:
-      - mynetwork
+    restart: always
     depends_on:
       mysql:
         condition: service_healthy
-    environment:
+     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/project10
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - SPRING_JPA_SHOW_SQL=false
+    ports:
+      - "8080:8080"
 
   frontend:
     build:
       context: ./frontend
+      dockerfile: Dockerfile
     container_name: project10-frontend
-    ports:
-      - "8081:80"
-    networks:
-      - mynetwork
+    restart: always
     depends_on:
       - backend
+    ports:
+      - "8081:80"
 
-networks:
-  mynetwork:
-    driver: bridge
+volumes:
+  mysql-data:
