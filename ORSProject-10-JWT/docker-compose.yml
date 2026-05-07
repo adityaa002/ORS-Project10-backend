@@ -23,7 +23,7 @@ services:
 
   backend:
     build:
-      context: ./backend/ORSProject-10-JWT
+      context: ./backend/ORSProject-10-JWT  # 🔥 MATCH JENKINS COPY PATH
       dockerfile: Dockerfile
     image: project10-backend:latest
     container_name: project10-backend
@@ -43,7 +43,7 @@ services:
 
   frontend:
     build:
-      context: ./frontend
+      context: ./frontend  # 🔥 MATCH JENKINS COPY PATH
       dockerfile: Dockerfile
     image: project10-frontend:latest
     container_name: project10-frontend
