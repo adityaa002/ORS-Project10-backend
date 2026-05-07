@@ -130,7 +130,6 @@ com\rays\ctl\CacheCtl.class
 com\rays\service\InquiryServiceImpl.class
 com\rays\service\RoleServiceInt.class
 com\rays\dao\FacultyDAOImpl.class
-com\rays\ctl\ProductCtl.class
 com\rays\dto\SubscriptionUsageDTO.class
 com\rays\ctl\SettingCtl.class
 com\rays\form\CourseForm.class

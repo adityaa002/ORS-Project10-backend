@@ -11,12 +11,13 @@ import org.springframework.stereotype.Repository;
 
 import com.rays.common.BaseDAOImpl;
 import com.rays.dto.AuditDTO;
+
 /**
  * Audit Data Access Object Implementation
  *
  * <p>
- * Provides database interaction logic for Audit entity.
- * Extends {@link BaseDAOImpl} to inherit generic CRUD operations.
+ * Provides database interaction logic for Audit entity. Extends
+ * {@link BaseDAOImpl} to inherit generic CRUD operations.
  * </p>
  *
  * <p>
@@ -41,11 +42,11 @@ public class AuditDAOImpl extends BaseDAOImpl<AuditDTO> implements AuditDAOInt {
 		List<Predicate> whereCondition = new ArrayList<Predicate>();
 
 		if (!isEmptyString(dto.getActionType())) {
-			builder.like(qRoot.get("actionType"), dto.getActionType());
+			whereCondition.add(builder.like(qRoot.get("actionType"), dto.getActionType()));
 
 		}
 		if (!isZeroNumber(dto.getId())) {
-			builder.like(qRoot.get("id"), dto.getId() + "%");
+			whereCondition.add(builder.like(qRoot.get("id"), dto.getId() + "%"));
 
 		}
 
