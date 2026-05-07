@@ -13,7 +13,7 @@ services:
     networks:
       - mynetwork
     volumes:
-      - mysql-data:/var/lib/mysql
+      - ./mysql-data:/var/lib/mysql
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
@@ -23,9 +23,7 @@ services:
 
   backend:
     build:
-      context: ./backend/ORSProject-10-JWT
-      dockerfile: Dockerfile
-    image: project10-backend:latest
+      context: ./backend
     container_name: project10-backend
     ports:
       - "8080:8080"
@@ -44,8 +42,6 @@ services:
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
-    image: project10-frontend:latest
     container_name: project10-frontend
     ports:
       - "8081:80"
@@ -57,6 +53,3 @@ services:
 networks:
   mynetwork:
     driver: bridge
-
-volumes:
-  mysql-data:
