@@ -31,12 +31,12 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
-     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/project10
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=root
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-      - SPRING_JPA_SHOW_SQL=false
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/project10
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "false"
     ports:
       - "8080:8080"
 
