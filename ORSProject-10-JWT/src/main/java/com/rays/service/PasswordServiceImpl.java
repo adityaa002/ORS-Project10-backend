@@ -10,5 +10,5 @@ import com.rays.dto.PasswordDTO;
 @Service
 @Transactional
 public class PasswordServiceImpl extends BaseServiceImpl<PasswordDTO, PasswordDAOInt> implements PasswordServiceInt {
-
+ 
 }

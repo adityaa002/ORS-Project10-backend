@@ -11,7 +11,7 @@ import com.rays.common.BaseDTO;
 public class PasswordDTO extends BaseDTO {
 
 	@Column(name = "password_code", length = 50)
-	private String passwordCode;
+	private String passwordCode; 
 
 	@Column(name = "user_name", length = 50)
 	private String userName;

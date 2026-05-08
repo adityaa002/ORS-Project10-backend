@@ -23,7 +23,7 @@ public class PasswordCtl extends BaseCtl<PasswordForm, PasswordDTO, PasswordServ
 	@Autowired
 	public PasswordServiceInt passwordService;
 
-	@GetMapping("/preload")
+	@GetMapping("/preload") 
 	public ORSResponse preload() {
 		ORSResponse res = new ORSResponse(true);
 		UserContext uc = UserContextHolder.getContext();

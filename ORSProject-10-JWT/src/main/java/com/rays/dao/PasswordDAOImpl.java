@@ -21,7 +21,7 @@ public class PasswordDAOImpl extends BaseDAOImpl<PasswordDTO> implements Passwor
 		return PasswordDTO.class;
 	}
 
-	@Override
+	@Override  
 	protected List<Predicate> getWhereClause(PasswordDTO dto, CriteriaBuilder builder, Root<PasswordDTO> qRoot) {
 		List<Predicate> whereCondition = new ArrayList<Predicate>();
 

@@ -5,4 +5,4 @@ import com.rays.dto.PasswordDTO;
 
 public interface PasswordDAOInt extends BaseDAOInt<PasswordDTO> {
 
-}
+} 
